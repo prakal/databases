@@ -29,21 +29,3 @@ if (!module.parent) {
   app.listen(app.get("port"));
   console.log("Listening on", app.get("port"));
 }
-
-// app.get('/',function(req,res){
-//   // db.connection.query('INSERT INTO ') /
-//   res.end("sdfdsfsdf");
-//   console.log("DOING GET NOWZ");
-// });
-
-// app.post('/',function(req,res){
-//   console.log("DOING POST NOWZ");
-//   var valuesArr = [JSON.stringify(req.body.username), JSON.stringify(req.body.message), JSON.stringify(req.body.roomname)];
-//   db.connection.query('INSERT INTO messages (username, message, roomname) VALUES', '(\'' + req.body.username + '\',\'' + req.body.message + '\',\'' + req.body.roomname + '\')', function(err) {
-//     console.log("+++");
-//     if (err) {
-//       console.log(err);
-//     }
-//     db.connection.end();
-//   });
-// });

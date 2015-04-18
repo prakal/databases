@@ -7,8 +7,24 @@ db.connection.connect();
 
 module.exports = {
   messages: {
+
     get: function (req, res) {
-      console.log("HI DAVID AND KHOA (RAYMOND TOO)");
+      var queryString = 'SELECT * FROM messages';
+      var collector = [];
+      var handler = function(data) {
+        console.log("HANDLER " + data);
+        // res.end("username: " + data.username + ", message: " + data.message + ", roomname: " + data.roomname)
+        res.end(JSON.stringify(data));
+      };
+      db.connection.query(queryString, function(err, rows, fields) {
+      if (err) throw err;
+
+      for (var i in rows) {
+        console.log(JSON.stringify(rows[i]));
+        collector.push(rows[i]);
+      }
+      handler(collector);
+    });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       var obj = {username: req.body.username, message: req.body.message, roomname: req.body.roomname};
@@ -20,9 +36,12 @@ module.exports = {
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
+    get: function (req, res) {
+      res.end();
+    },
     post: function (req, res) {
-      res.writeHead(201);
+      var obj = {username: req.body.username};
+      db.connection.query('INSERT INTO users (username) VALUES (\'' + obj.username + '\')');
       res.end();
     }
   }
